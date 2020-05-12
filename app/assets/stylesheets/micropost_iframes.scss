@@ -1,3 +1,10 @@
 // Place all the styles related to the MicropostIframes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#iframe-microposts {
+  height: 500px;
+}
+#microposts {
+  list-style: none;
+}

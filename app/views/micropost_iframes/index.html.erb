@@ -1,8 +1,12 @@
+<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
 <h1>誰かのマイクロポスト</h1>
 <p>ここに誰かのマイクロポストがたくさん入る</p>
-<ol>
-	<% @microposts_hash.each do |list| %>
+<ol id = "microposts">
+	<% @microposts_hash["microposts"].each do |list| %>
 		<li>
+			<span><%= @microposts_hash["user_name"] %></span>
+			<span><%= image_tag @microposts_hash["icon_url"] %></span>
 			<span><%= list["content"] %></span>
 			<span><%= list["created_at"] %></span>
 		</li>

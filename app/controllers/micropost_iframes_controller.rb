@@ -9,6 +9,7 @@ class MicropostIframesController < ApplicationController
     microposts_json = Net::HTTP.get(uri)
     @microposts_hash = JSON.parse(microposts_json)
 =end
+
     File.open("#{Rails.public_path}/json/microposts.json") do |j|
       @microposts_hash = JSON.load(j)
     end
