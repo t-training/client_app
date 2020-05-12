@@ -1,8 +1,10 @@
 <h1>誰かのマイクロポスト</h1>
 <p>ここに誰かのマイクロポストがたくさん入る</p>
-<ul>
-	<% @microposts_hash["pinpointLocations"].each do |list| %>
-		<li> <%= list["name"] %> </li>
-		<p> <%= list["link"] %> </p>
+<ol>
+	<% @microposts_hash.each do |list| %>
+		<li>
+			<span><%= list["content"] %></span>
+			<span><%= list["created_at"] %></span>
+		</li>
 	<% end %>
-</ul>
+</ol>
