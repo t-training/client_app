@@ -4,10 +4,10 @@
 <ol id = "microposts">
 	<% @microposts_hash["microposts"].each do |list| %>
 		<li>
-			<span><%= image_tag @microposts_hash["icon_url"] %></span>
-			<span><%= @microposts_hash["user_name"] %></span>
-			<span><%= list["content"] %></span>
-			<span><%= list["created_at"] %></span>
+			<span class = "gravatar"><%= image_tag @microposts_hash["icon_url"] %></span>
+			<span class = "user"><%= @microposts_hash["user_name"] %></span>
+			<span class = "content"><%= list["content"] %></span>
+			<span class = "timestamp"><%= list["created_at"] %></span>
 		</li>
 	<% end %>
 </ol>

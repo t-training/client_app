@@ -9,9 +9,13 @@
   </head>
 
   <body>
-    <%= render 'shared/header' %>
-    <%= yield %>
-    <iframe id = "iframe-microposts" src="/microposts"></iframe>
-    <%= render 'shared/footer' %>
+    <div class = "main-block">
+      <%= render 'shared/header' %>
+      <div class = "main-content">
+        <%= yield %>
+      </div>
+      <iframe id = "iframe-microposts" src="/microposts"></iframe>
+      <%= render 'shared/footer' %>
+    </div>
   </body>
 </html>
