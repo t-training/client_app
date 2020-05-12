@@ -3,7 +3,7 @@ require 'uri'
 require 'json'
 
 class MicropostIframesController < ApplicationController
-  def show_microposts
+  def index
     uri = URI.parse('http://weather.livedoor.com/forecast/webservice/json/v1?city=140010')
     microposts_json = Net::HTTP.get(uri)
     @microposts_hash = JSON.parse(microposts_json)
