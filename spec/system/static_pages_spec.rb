@@ -19,7 +19,7 @@ RSpec.describe "StaticPages", type: :system do
       end
       it `returns user_name` do
         within_frame(iframe) do
-          is_expected.to have_selector(".user",text: "Example User")
+          is_expected.to have_selector(".user")
         end
       end
       it `returns user_post` do
