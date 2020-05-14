@@ -2,12 +2,12 @@
 
 <h2><%= "#{@microposts_hash["user_name"]}のpost" %></h2>
 <ol id = "microposts">
-	<% @microposts_hash["microposts"].each do |list| %>
+	<% @microposts["microposts"].each do |micropost| %>
 		<li>
-			<span class = "gravatar"><%= image_tag @microposts_hash["icon_url"] %></span>
-			<span class = "user"><%= @microposts_hash["user_name"] %></span>
-			<span class = "content"><%= list["content"] %></span>
-			<span class = "timestamp"><%= list["created_at"] %></span>
+			<span class = "gravatar"><%= image_tag @microposts["icon_url"] %></span>
+			<span class = "user"><%= @microposts["user_name"] %></span>
+			<span class = "content"><%= micropost["content"] %></span>
+			<span class = "timestamp"><%= micropost["created_at"] %></span>
 		</li>
 	<% end %>
 </ol>
