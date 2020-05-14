@@ -1,4 +1,4 @@
 class TopPagesController < ApplicationController
-  def home
+  def index
   end
 end
