@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "StaticPages", type: :system do
+RSpec.describe "TopPages", type: :system do
   before { visit root_path }
   subject { page }
   describe `root` do
