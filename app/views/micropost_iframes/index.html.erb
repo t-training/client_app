@@ -1,6 +1,6 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-<h2><%= "#{@microposts_hash["user_name"]}のpost" %></h2>
+<h2><%= "#{@microposts["user_name"]}のpost" %></h2>
 <ol id="microposts">
   <% @microposts["microposts"].each do |micropost| %>
   <li>
