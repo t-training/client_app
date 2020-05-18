@@ -20,6 +20,7 @@ RSpec.configure do |config|
     driven_by :selenium_chrome_headless
   end
   config.before(:each) do
+    WebMock.allow_net_connect!
     WebMock.stub_request(:get, "https://afternoon-anchorage-19414.herokuapp.com/api/v1/users/2/microposts").to_return(
       body: File.read("#{Rails.root}/test/fixtures/user1_microposts.json"),
       status: 200,
