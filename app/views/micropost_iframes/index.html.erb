@@ -1,18 +1,7 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
 <% if @microposts.key?("message") %>
-  <h2>エラー</h2>
-  <p><%= @microposts["message"] %></p>
+  <%= render 'micropost_iframes/error_microposts' %>
 <% else %>
-  <h2><%= "#{@microposts["user_name"]}のpost" %></h2>
-  <ol id="microposts">
-    <% @microposts["microposts"].each do |micropost| %>
-    <li>
-      <span class="gravatar"><%= image_tag @microposts["icon_url"] %></span>
-      <span class="user"><%= @microposts["user_name"] %></span>
-      <span class="content"><%= micropost["content"] %></span>
-      <span class="timestamp"><%= micropost["created_at"] %></span>
-    </li>
-    <% end %>
-  </ol>
+  <%= render 'micropost_iframes/microposts' %>
 <% end %>
