@@ -14,9 +14,17 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'capybara/rspec'
+require 'webmock/rspec'
 RSpec.configure do |config|
   config.before(:each, type: :system) do
     driven_by :selenium_chrome_headless
+  end
+  config.before(:each) do
+    WebMock.allow_net_connect!
+    stub_request(:get, "https://afternoon-anchorage-19414.herokuapp.com/api/v1/users/2/microposts").to_return(
+      body: File.read("#{Rails.root}/test/fixtures/user1_microposts.json"),
+      status: 200,
+      headers: { 'Content-Type' => 'application/json' })
   end
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
