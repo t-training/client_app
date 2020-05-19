@@ -18,5 +18,12 @@ RSpec.describe "MicropostIframes", type: :request do
         is_expected.to include "Validation Failed"
       end
     end
+  
+    context `blank id` do
+      before { get microposts_path id:"" }
+      it `returns 404` do
+        is_expected.to include "404"
+      end
+    end
   end
 end
