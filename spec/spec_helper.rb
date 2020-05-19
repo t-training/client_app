@@ -25,6 +25,10 @@ RSpec.configure do |config|
       body: File.read("#{Rails.root}/test/fixtures/user1_microposts.json"),
       status: 200,
       headers: { 'Content-Type' => 'application/json' })
+    stub_request(:get, "https://afternoon-anchorage-19414.herokuapp.com/api/v1/users/999/microposts").to_return(
+      body: File.read("#{Rails.root}/test/fixtures/bad_user_id.json"),
+      status: 200,
+      headers: { 'Content-Type' => 'application/json' })
   end
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
