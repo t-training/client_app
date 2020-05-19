@@ -21,8 +21,12 @@ RSpec.configure do |config|
   end
   config.before(:each) do
     WebMock.allow_net_connect!
-    stub_request(:get, "https://afternoon-anchorage-19414.herokuapp.com/api/v1/users/2/microposts").to_return(
+    stub_request(:get, "https://afternoon-anchorage-19414.herokuapp.com/api/v1/users/1/microposts").to_return(
       body: File.read("#{Rails.root}/test/fixtures/user1_microposts.json"),
+      status: 200,
+      headers: { 'Content-Type' => 'application/json' })
+    stub_request(:get, "https://afternoon-anchorage-19414.herokuapp.com/api/v1/users/999/microposts").to_return(
+      body: File.read("#{Rails.root}/test/fixtures/bad_user_id.json"),
       status: 200,
       headers: { 'Content-Type' => 'application/json' })
   end
