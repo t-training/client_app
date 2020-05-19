@@ -1,2 +1,6 @@
 <h2>エラー</h2>
-<p><%= @microposts["message"] %></p>
+<% if @error.key?("status") %>
+  <p><%= @error["status"] %></p>
+<% else %>
+  <p><%= @error["message"] %></p>
+<% end %>
