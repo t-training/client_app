@@ -4,14 +4,24 @@ require 'json'
 
 class MicropostIframesController < ApplicationController
   def index 
-    uri = URI.parse("https://afternoon-anchorage-19414.herokuapp.com/api/v1/users/#{params[:id]}/microposts")
+    uri = URI.parse("https://afternoon-anchorage-19414.herokuapp.com/api/v1/users/1/microposts")
     response = Net::HTTP.get_response(uri)
-    if (response.code == "200")
-      @microposts = JSON.parse(response.body)
-      render partial: 'microposts'
+    mime_type = response["Content-Type"]
+    status = response.code
+    if(mime_type.include?("application/json"))
+      if(status == "200")
+        @microposts = JSON.parse(response.body)
+        render partial: 'microposts'
+      else
+        @errors = JSON.parse(response.body)
+        render layout: nil, partial: 'error_microposts_api_json'
+      end
     else
-      @error = JSON.parse(response.body)
-      render partial: 'error_microposts'
+      if(status == "200")
+        render layout: nil, partial: 'response_not_json'
+      end
+      @status = status
+      render layout: nil, partial: 'error_microposts_api'
     end
   end
 end
