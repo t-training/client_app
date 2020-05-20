@@ -1,7 +1,0 @@
-<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-
-<% if @microposts.key?("message") %>
-  <%= render 'micropost_iframes/error_microposts' %>
-<% else %>
-  <%= render 'micropost_iframes/microposts' %>
-<% end %>

@@ -27,7 +27,11 @@ RSpec.configure do |config|
       headers: { 'Content-Type' => 'application/json' })
     stub_request(:get, "https://afternoon-anchorage-19414.herokuapp.com/api/v1/users/999/microposts").to_return(
       body: File.read("#{Rails.root}/test/fixtures/bad_user_id.json"),
-      status: 200,
+      status: 404,
+      headers: { 'Content-Type' => 'application/json' })
+    stub_request(:get, "https://afternoon-anchorage-19414.herokuapp.com/api/v1/users//microposts").to_return(
+      body: File.read("#{Rails.root}/test/fixtures/not_found.json"),
+      status: 404,
       headers: { 'Content-Type' => 'application/json' })
   end
   # rspec-expectations config goes here. You can use an alternate
