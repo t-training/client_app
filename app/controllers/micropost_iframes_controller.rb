@@ -4,7 +4,7 @@ require 'json'
 
 class MicropostIframesController < ApplicationController
   def index 
-    uri = URI.parse("https://afternoon-anchorage-19414.herokuapp.com/api/v1/users/#{id}/microposts")
+    uri = URI.parse("https://afternoon-anchorage-19414.herokuapp.com/api/v1/users/#{params[:id]}/microposts")
     response = Net::HTTP.get_response(uri)
     mime_type = response["Content-Type"]
     status = response.code
