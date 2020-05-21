@@ -12,17 +12,17 @@ class MicropostIframesController < ApplicationController
       if(status == "200")
         @microposts = JSON.parse(response.body)
         @profile = "https://afternoon-anchorage-19414.herokuapp.com/users/#{params[:id]}"
-        render partial: 'microposts'
+        render 'microposts'
       else
         @errors = JSON.parse(response.body)
-        render layout: nil, partial: 'error_microposts_api_json'
+        render 'error_microposts_api_json'
       end
     else
       if(status == "200")
-        render layout: nil, partial: 'response_not_json'
+        render 'response_not_json'
       end
       @status = status
-      render layout: nil, partial: 'error_microposts_api'
+      render 'error_microposts_api'
     end
   end
 end
