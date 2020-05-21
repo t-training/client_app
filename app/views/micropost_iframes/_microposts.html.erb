@@ -11,3 +11,6 @@
 	</li>
 	<% end %>
 </ol>
+<% if !(@profile.nil?) %>
+<%= link_to "#{@microposts["user_name"]}の呟きをもっとみる", @profile, target: :_blank %>
+<% end %>
