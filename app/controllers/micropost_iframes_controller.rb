@@ -21,9 +21,9 @@ class MicropostIframesController < ApplicationController
       else
         if(status == "200")
           render 'response_not_json'
-        end
-        @status = status
-        render 'error_microposts_api'
+        else
+          @status = status
+          render 'error_microposts_api'
         end
       end
     rescue => exception
