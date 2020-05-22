@@ -7,10 +7,8 @@ class MicropostIframesController < ApplicationController
     uri = URI.parse("https://afternoon-anchorage-19414.herokuapp.com/api/v1/users/#{params[:id]}/microposts")
     begin
       response = Net::HTTP.get_response(uri)
-      mime_type = response["Content-Type"]
-      status = response.code
-      if(mime_type.include?("application/json"))
-        if(status == "200")
+      if response["Content-Type"].include?("application/json")
+        if response.code == "200"
           @microposts = JSON.parse(response.body)
           @profile = "https://afternoon-anchorage-19414.herokuapp.com/users/#{params[:id]}"
           render 'microposts'
@@ -19,10 +17,10 @@ class MicropostIframesController < ApplicationController
           render 'error_microposts_api_json'
         end
       else
-        if(status == "200")
+        if response.code == "200"
           render 'response_not_json'
         else
-          @status = status
+          @status = response.code
           render 'error_microposts_api'
         end
       end
