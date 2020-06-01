@@ -3,6 +3,8 @@ require 'uri'
 require 'json'
 
 class FollowController < ApplicationController
+  protect_from_forgery :except => [:create]
+
   def create 
     #REVIEW: 未テスト
     uri = URI.parse("https://afternoon-anchorage-19414.herokuapp.com/api/v1/relationships")
@@ -15,7 +17,7 @@ class FollowController < ApplicationController
     req = Net::HTTP::Post.new(uri.path)
     req.set_form_data(request_params)
     req.initialize_http_header({ "Content-Type" => "application/json"})
-    req.initialize_http_header({ "Authorization" => "Token " + cookies.permanent[:access_token]})
+    req.initialize_http_header({ "Authorization" => "Token #{cookies.permanent[:access_token]}"})
     
     response = http.request(req)
 
