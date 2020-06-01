@@ -3,7 +3,7 @@ require 'uri'
 require 'json'
 
 class FollowController < ApplicationController
-  def post 
+  def create 
     #REVIEW: 未テスト
     uri = URI.parse("https://afternoon-anchorage-19414.herokuapp.com/api/v1/relationships")
     http = Net::HTTP.new(uri.host, uri.port)
@@ -18,7 +18,8 @@ class FollowController < ApplicationController
     req.initialize_http_header({ "Authorization" => "Token " + cookies.permanent[:access_token]})
     
     response = http.request(req)
-    
+
+    redirect_to root_url
     #TODO: responseのログイン状態を見て、ログインしていなければログインに飛ばしたりメッセージ表示したり
     #TODO: responseのフォロー状態を見て、メッセージを表示
   end
