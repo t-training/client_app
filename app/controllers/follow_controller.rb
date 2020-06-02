@@ -21,7 +21,6 @@ class FollowController < ApplicationController
     
     response = http.request(req)
 
-    redirect_to root_url
     #TODO: responseのログイン状態を見て、ログインしていなければログインに飛ばしたりメッセージ表示したり
     #TODO: responseのフォロー状態を見て、メッセージを表示
   end
