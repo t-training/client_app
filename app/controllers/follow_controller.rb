@@ -27,7 +27,10 @@ class FollowController < ApplicationController
       uri = URI("https://afternoon-anchorage-19414.herokuapp.com/login/")
       uri.query = URI.encode_www_form({url: root_url})
       redirect_to uri.to_s
+    elsif(!reponse_json["followed"])
+      #TODO: 既にフォローしていたことを伝えるメッセージ表示
+    elsif(response_json["followed"]) 
+      #TODO: フォローできたことを伝えるメッセージ表示
     end
-    #TODO: responseのフォロー状態を見て、メッセージを表示
   end
 end
