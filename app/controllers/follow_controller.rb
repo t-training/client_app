@@ -3,7 +3,7 @@ require 'uri'
 require 'json'
 
 class FollowController < ApplicationController
-  def post 
+  def create 
     #REVIEW: 未テスト
     uri = URI.parse("https://afternoon-anchorage-19414.herokuapp.com/api/v1/relationships")
     http = Net::HTTP.new(uri.host, uri.port)
