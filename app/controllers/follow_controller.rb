@@ -20,8 +20,14 @@ class FollowController < ApplicationController
     req.initialize_http_header({ "Authorization" => "Token #{cookies.permanent[:access_token]}"})
     
     response = http.request(req)
-
-    #TODO: responseのログイン状態を見て、ログインしていなければログインに飛ばしたりメッセージ表示したり
+    
+    response_json = JSON.parse(response.body)
+    
+    if(!response_json["is_logged"])
+      uri = URI("https://afternoon-anchorage-19414.herokuapp.com/login/")
+      uri.query = URI.encode_www_form({url: root_url})
+      redirect_to uri.to_s
+    end
     #TODO: responseのフォロー状態を見て、メッセージを表示
   end
 end
