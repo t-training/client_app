@@ -23,6 +23,7 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem 'webdrivers'
   gem 'webmock'
+  gem 'show_me_the_cookies'
 end
 
 group :development do
