@@ -43,8 +43,9 @@ RSpec.describe "TopPages", type: :system do
         token_cookie = cookies.find { |c| c[:name] == "access_token" }
         id_cookie = cookies.find { |c| c[:name] == "user_id" }
         expect(token_cookie[:value]).to eq token
-        # FIXME: id_cookieは署名付きクッキーなので合わない
-        expect(id_cookie[:value]).to eq user_id
+        signed_id_cookie = ActionDispatch::Request.new(Rails.application.env_config.deep_dup).cookie_jar
+        signed_id_cookie.signed["user_id"] = user_id
+        expect(id_cookie[:value]).to eq signed_id_cookie[:user_id]
       end
     end
   end
