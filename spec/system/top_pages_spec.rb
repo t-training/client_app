@@ -9,14 +9,14 @@ RSpec.describe "TopPages", type: :system do
     end
   end
   
-  describe 'outside login' do
+  describe 'リモートログイン' do
     describe '遷移前' do
       before do
         visit root_path
         click_link "Log in"
       end
       
-      scenario 'URL付きでリダイレクトされること' do
+      it 'URL付きでリダイレクトされること' do
         expect(page).to have_current_path("https://afternoon-anchorage-19414.herokuapp.com/login/", ignore_query: true)
         query_hash = Rack::Utils.parse_nested_query(URI.parse(current_url).query)
         expect(query_hash['url']).to_not be_empty
@@ -33,12 +33,12 @@ RSpec.describe "TopPages", type: :system do
         uri.query = URI.encode_www_form({user_id: user_id, token: token})
         visit uri
       end
-      scenario "user_idとtokenがURLに含まれていること" do
+      it "user_idとtokenがURLに含まれていること" do
         query_hash = Rack::Utils.parse_nested_query(URI.parse(current_url).query)
         expect(query_hash['user_id']).to_not be_empty
         expect(query_hash['token']).to_not be_empty
       end
-      scenario "cookiesに保存されていること" do
+      it "cookiesに保存されていること" do
         cookies = page.driver.browser.manage.all_cookies
         token_cookie = cookies.find { |c| c[:name] == "access_token" }
         id_cookie = cookies.find { |c| c[:name] == "user_id" }
