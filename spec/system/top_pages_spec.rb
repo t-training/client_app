@@ -39,7 +39,6 @@ RSpec.describe "TopPages", type: :system do
         expect(query_hash['token']).to_not be_empty
       end
       scenario "cookiesに保存されていること" do
-        show_me_the_cookies
         cookies = page.driver.browser.manage.all_cookies
         token_cookie = cookies.find { |c| c[:name] == "access_token" }
         id_cookie = cookies.find { |c| c[:name] == "user_id" }
