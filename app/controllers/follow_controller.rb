@@ -8,10 +8,10 @@ class FollowController < ApplicationController
   
   def create 
     #REVIEW: 未テスト
-    uri = URI.parse("https://afternoon-anchorage-19414.herokuapp.com/api/v1/relationships")
+    uri = URI.parse("https://afternoon-anchorage-19414.herokuapp.com/api/v1/users/#{cookies.permanent.signed[:user_id]}/relationships")
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = uri.scheme === "https"
-    req = update_request(uri, cookies.permanent.signed[:user_id], params[:followed_id], cookies.permanent[:access_token])
+    req = update_request(uri, params[:followed_id], cookies.permanent[:access_token])
 
     response = http.request(req)
     

@@ -1,5 +1,5 @@
 module FollowHelper
-  def update_request(uri, user_id, followed_id, token)
+  def update_request(uri, followed_id, token)
     request_params = { followed_id: followed_id }
     
     req = Net::HTTP::Post.new(uri.path)
