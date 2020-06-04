@@ -1,20 +1,17 @@
 require 'net/http'
 require 'uri'
 require 'json'
+require 'rest-client'
 
 class FollowController < ApplicationController
   protect_from_forgery :except => [:create]
-  include FollowHelper
-  
+
   def create 
     #REVIEW: 未テスト
-    uri = URI.parse("https://afternoon-anchorage-19414.herokuapp.com/api/v1/users/#{cookies.permanent.signed[:user_id]}/relationships")
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = uri.scheme === "https"
-    req = update_request(uri, params[:followed_id], cookies.permanent[:access_token])
-
     begin
-      response = http.request(req)
+      response = RestClient.post "https://afternoon-anchorage-19414.herokuapp.com/api/v1/users/#{cookies.permanent.signed[:user_id]}/relationships",
+                      {params: {:followed_id => params[:followed_id]}}, 
+                      {:Content-Type => "application/json", :Authorization => "Token #{cookies.permanent[:access_token]}"}
       
       response_json = JSON.parse(response.body)
       
