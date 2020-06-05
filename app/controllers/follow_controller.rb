@@ -1,8 +1,3 @@
-require 'net/http'
-require 'uri'
-require 'json'
-require 'rest-client'
-
 class FollowController < ApplicationController
   protect_from_forgery :except => [:create]
 
