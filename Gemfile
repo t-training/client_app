@@ -14,6 +14,7 @@ gem 'jquery-rails', '4.3.1'
 gem 'turbolinks',   '5.0.1'
 gem 'jbuilder',     '2.7.0'
 gem 'bootstrap-sass', '3.4.1'
+gem 'rest-client', '~> 2.1'
 gem 'faker',        '~> 2.12'
 
 group :development, :test do
