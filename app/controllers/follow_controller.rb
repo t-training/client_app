@@ -11,8 +11,10 @@ class FollowController < ApplicationController
     if(response.code == 200)
       if(!response_json["followed"])
         flash[:info] = "既にフォローしています"
+        redirect_to root_url
       elsif(response_json["followed"])
         flash[:success] = "フォローできました"
+        redirect_to root_url
       end
     else
       uri = URI("https://afternoon-anchorage-19414.herokuapp.com/login/")
