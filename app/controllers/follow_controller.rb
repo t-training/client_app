@@ -4,15 +4,14 @@ class FollowController < ApplicationController
   def create 
     #REVIEW: 未テスト
     response = RestClient.post "https://afternoon-anchorage-19414.herokuapp.com/api/v1/users/#{cookies.permanent.signed[:user_id]}/relationships",
-                    params: {followed_id: params[:followed_id]}, 
-                    headers: {content_type: "application/json", Authorization: "Token #{cookies.permanent[:access_token]}"}
-    
+                    {followed_id: params[:followed_id]}, 
+                    {Authorization: "Token #{cookies.permanent[:access_token]}"}    
     response_json = JSON.parse(response.body)
     
     if(response.code == "200")
-      if(!reponse_json["followed"])
+      if(!response_json["followed"])
         flash[:info] = "既にフォローしています"
-      elsif(response_json["followed"]) 
+      elsif(response_json["followed"])
         flash[:success] = "フォローできました"
       end
     else
