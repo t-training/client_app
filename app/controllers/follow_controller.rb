@@ -4,8 +4,8 @@ class FollowController < ApplicationController
   def create 
     #REVIEW: 未テスト
     response = RestClient.post "https://afternoon-anchorage-19414.herokuapp.com/api/v1/users/#{cookies.permanent.signed[:user_id]}/relationships",
-                    {params: {followed_id: params[:followed_id]}}, 
-                    {content_type: "application/json", Authorization: "Token #{cookies.permanent[:access_token]}"}
+                    params: {followed_id: params[:followed_id]}, 
+                    headers: {content_type: "application/json", Authorization: "Token #{cookies.permanent[:access_token]}"}
     
     response_json = JSON.parse(response.body)
     
