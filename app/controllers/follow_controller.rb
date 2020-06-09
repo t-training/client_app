@@ -7,7 +7,7 @@ class FollowController < ApplicationController
                     {followed_id: params[:followed_id]}, 
                     {Authorization: "Token #{cookies.permanent[:access_token]}"}    
     response_json = JSON.parse(response.body)
-    print response.code
+
     if(response.code == 200)
       if(!response_json["followed"])
         flash[:info] = "既にフォローしています"
