@@ -4,22 +4,24 @@ class FollowController < ApplicationController
   def create 
     #REVIEW: 未テスト
     response = RestClient.post "https://afternoon-anchorage-19414.herokuapp.com/api/v1/users/#{cookies.permanent.signed[:user_id]}/relationships",
-                    params: {followed_id: params[:followed_id]}, 
-                    headers: {content_type: "application/json", Authorization: "Token #{cookies.permanent[:access_token]}"}
-    
+                    {followed_id: params[:followed_id]}, 
+                    {Authorization: "Token #{cookies.permanent[:access_token]}"}    
     response_json = JSON.parse(response.body)
-    
-    if(response.code == "200")
-      if(!reponse_json["followed"])
+
+    if(response.code == 200)
+      if(!response_json["followed"])
         flash[:info] = "既にフォローしています"
-      elsif(response_json["followed"]) 
+        redirect_to root_url
+      elsif(response_json["followed"])
         flash[:success] = "フォローできました"
+        redirect_to root_url
       end
-    else
-      uri = URI("https://afternoon-anchorage-19414.herokuapp.com/login/")
-      uri.query = URI.encode_www_form({url: root_url})
-      redirect_to uri.to_s
     end
+  rescue RestClient::NotFound, RestClient::Unauthorized
+    uri = URI("https://afternoon-anchorage-19414.herokuapp.com/login/")
+    uri.query = URI.encode_www_form({url: root_url})
+    redirect_to uri.to_s
+    
   rescue
     flash[:danger] = "アクセスエラー"
     redirect_to root_url
