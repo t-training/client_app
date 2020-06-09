@@ -17,12 +17,7 @@ class FollowController < ApplicationController
         redirect_to root_url
       end
     end
-  rescue RestClient::NotFound
-    uri = URI("https://afternoon-anchorage-19414.herokuapp.com/login/")
-    uri.query = URI.encode_www_form({url: root_url})
-    redirect_to uri.to_s
-    
-  rescue RestClient::Unauthorized
+  rescue RestClient::NotFound, RestClient::Unauthorized
     uri = URI("https://afternoon-anchorage-19414.herokuapp.com/login/")
     uri.query = URI.encode_www_form({url: root_url})
     redirect_to uri.to_s
