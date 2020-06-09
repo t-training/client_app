@@ -7,7 +7,7 @@ class FollowController < ApplicationController
                     {followed_id: params[:followed_id]}, 
                     {Authorization: "Token #{cookies.permanent[:access_token]}"}    
     response_json = JSON.parse(response.body)
-    
+    print response.code
     if(response.code == 200)
       if(!response_json["followed"])
         flash[:info] = "既にフォローしています"
@@ -16,11 +16,17 @@ class FollowController < ApplicationController
         flash[:success] = "フォローできました"
         redirect_to root_url
       end
-    else
-      uri = URI("https://afternoon-anchorage-19414.herokuapp.com/login/")
-      uri.query = URI.encode_www_form({url: root_url})
-      redirect_to uri.to_s
     end
+  rescue RestClient::NotFound
+    uri = URI("https://afternoon-anchorage-19414.herokuapp.com/login/")
+    uri.query = URI.encode_www_form({url: root_url})
+    redirect_to uri.to_s
+    
+  rescue RestClient::Unauthorized
+    uri = URI("https://afternoon-anchorage-19414.herokuapp.com/login/")
+    uri.query = URI.encode_www_form({url: root_url})
+    redirect_to uri.to_s
+    
   rescue
     flash[:danger] = "アクセスエラー"
     redirect_to root_url
