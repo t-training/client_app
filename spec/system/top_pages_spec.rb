@@ -49,4 +49,29 @@ RSpec.describe "TopPages", type: :system do
       end
     end
   end
+  describe "Follow連携テスト" do
+    subject { page }
+    
+    context "ログインしていなかった場合" do
+      before do
+        visit root_url
+        click_button "Follow"
+      end
+      it "ログイン画面にいること" do
+        is_expected.to have_current_path("https://afternoon-anchorage-19414.herokuapp.com/login/", ignore_query: true)
+      end
+    end
+    context "ログインしていた場合" do
+      before do
+        click_link "Log in"
+        fill_in "Email", with: "example@railstutorial.org"
+        fill_in "Password", with: "foobar"
+        click_button "Log in"
+        click_button "Follow"
+      end
+      it "root_pathにいること" do
+        is_expected.to have_current_path root_path
+      end
+    end
+  end
 end
