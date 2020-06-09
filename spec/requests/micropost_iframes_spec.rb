@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "MicropostIframes", type: :request do
-  describe `#index` do
+  xdescribe `#index` do
     subject { response.body }
 
     it `returns json` do
